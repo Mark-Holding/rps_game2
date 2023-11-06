@@ -1,3 +1,9 @@
+let compScore = 0;
+let playerScore = 0;
+
+
+
+
 function computerChoice() {
     let compRandNumber = Math.floor(Math.random()*3) 
     if(compRandNumber === 0){
@@ -15,22 +21,56 @@ function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
 
     if (playerSelection.toLowerCase() === computerSelection){
-        console.log('Draw!')
+        compScore +=1;
+        playerScore +=1;
+        return 'Draw!';
+        
     } else if (playerSelection.toLowerCase() === 'rock' && computerSelection === 'scissors'){
-        console.log('You win! Rock beats scissors.');
+        playerScore +=1;
+        return 'You win! Rock beats scissors.';
+        
     } else if (playerSelection.toLowerCase() === 'rock' && computerSelection === 'paper'){
-        console.log('You lose! Rock loses to paper.');
+        compScore +=1;
+        return 'You lose! Rock loses to paper.';
+        
     } else if (playerSelection.toLowerCase() === 'paper' && computerSelection === 'rock'){
-        console.log('You win! Paper beats rock.');
+        playerScore +=1;
+        return 'You win! Paper beats rock.';
+        
     } else if(playerSelection.toLowerCase() === 'paper' && computerSelection === 'scissors'){
-        console.log('You lose! Paper loses to scissors.');
+        compScore +=1;
+        return 'You lose! Paper loses to scissors.';
+        
     } else if(playerSelection.toLowerCase() === 'scissors' && computerSelection === 'rock'){
-        console.log('You lose! Scissors beats rock.');
+        compScore +=1;
+        return 'You lose! Scissors beats rock.';
+        
     } else if(playerSelection.toLowerCase() === 'scissors' && computerSelection === 'paper'){
-        console.log('You win! Scissors beats paper.');
+        playerScore +=1;
+        return 'You win! Scissors beats paper.';
+        
     }
 }
 
-const playerSelection = "Rock";
-const computerSelection = computerChoice();
-console.log(playRound(playerSelection, computerSelection))
+
+
+
+function game(){
+    for (let i = 0; i <5; i++){
+        const computerSelection = computerChoice();
+        let playerSelection = prompt("Enter your choice");
+        console.log(playRound(playerSelection, computerSelection))
+    }
+    console.log('Computer score: ', compScore);
+    console.log('Player Score: ', playerScore);
+    if (compScore === playerScore){
+        console.log('Final Score: Draw');
+    } else if (compScore > playerScore){
+        console.log('Final Score: Computer wins')
+    } else {
+        console.log('Final Score: You win!')
+    }
+
+}
+
+game()
